@@ -1,0 +1,57 @@
+{
+  "name": "use-url-query-state",
+  "version": "1.0.0",
+  "description": "Simple light weight React hook to use the url query parameters to store state",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "lint": "eslint . --ext .ts --ext .tsx",
+    "format": "prettier --config .prettierrc 'src/**/*.{ts,tsx}' --write",
+    "build": "tsc",
+    "start": "tsc --watch"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "state",
+    "url",
+    "route",
+    "query string",
+    "react-router"
+  ],
+  "author": {
+    "name": "Hein Pieterse",
+    "url": "https://handsaw.co.za/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hpieterse/use-url-query-state.git"
+  },
+  "license": "MIT",
+  "files": [
+    "dist/**/*",
+    "src/**/*",
+    "!src/**/*.test.ts",
+    "!src/**/*.test.tsx"
+  ],
+  "devDependencies": {
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.5.0",
+    "@types/react": "^18.0.31",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "eslint": "^8.37.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "prettier": "^2.8.7",
+    "ts-jest": "^29.0.5",
+    "typescript": "^5.0.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-router-dom": "^6.10.0"
+  }
+}

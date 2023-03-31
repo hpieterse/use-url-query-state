@@ -1,0 +1,22 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "esbuild app.tsx --bundle --servedir=www/ --outdir=www/js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "react": "file:../node_modules/react",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "file:../node_modules/react-router-dom",
+    "use-url-query-state": "file:../"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.31",
+    "@types/react-dom": "^18.0.11",
+    "esbuild": "^0.17.14"
+  }
+}
