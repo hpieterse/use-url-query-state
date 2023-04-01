@@ -4,20 +4,20 @@ import searchParser from "./searchParser";
 import asyncReducerQue from "./asyncReducerQue";
 
 const [reducerQue, setResolver] = asyncReducerQue<
-  { shortName: string; value: string; defaultValue: string },
+  { paramName: string; value: string; defaultValue: string },
   URLSearchParams
 >((result, newValue) => {
   if (newValue.value === newValue.defaultValue) {
-    result.delete(newValue.shortName);
+    result.delete(newValue.paramName);
   } else {
-    result.set(newValue.shortName, newValue.value);
+    result.set(newValue.paramName, newValue.value);
   }
 
   return result;
 });
 
 const useUrlQueryState = <T>(
-  shortName: string,
+  paramName: string,
   defaultValue: T
 ): [T, (newValue: T) => void] => {
   const currentValue = useRef<T>();
@@ -29,7 +29,7 @@ const useUrlQueryState = <T>(
   if (currentValue.current == null) {
     currentValue.current = searchParser(
       location.search,
-      shortName,
+      paramName,
       defaultValue
     );
   }
@@ -54,11 +54,11 @@ const useUrlQueryState = <T>(
       const defaultValueJsonString = JSON.stringify(defaultValue);
 
       reducerQue.que(
-        { shortName, value: jsonString, defaultValue: defaultValueJsonString },
+        { paramName, value: jsonString, defaultValue: defaultValueJsonString },
         newSearchParam
       );
     },
-    [shortName, location.search, defaultValue]
+    [paramName, location.search, defaultValue]
   );
 
   return [currentValue.current, setFunction];
