@@ -1,8 +1,8 @@
 # useUrlQueryState
-`useUrlQueryState` is a React hook that makes it easy to manage state in the URL query string.
+`useUrlQueryState` is a React hook that makes it easy to manage the state in the URL query string.
 
 ## Why
-In some cases it's beneficial to use the route to store your application state. It allows the user to refresh or bookmark a page and keep state. For example if a user wants to share or bookmark a specific search result.
+In some cases, it's beneficial to use the route to store your application state. It allows the user to refresh or bookmark a page and keep its state. For example, if a user wants to share or bookmark a specific search result.
 
 ## Getting Started
 To use `useUrlQueryState`, you can install it via npm:
@@ -11,7 +11,18 @@ To use `useUrlQueryState`, you can install it via npm:
 npm install --save use-url-query-state
 ```
 
-Then, you can import the hook in your React component and use it to manage state in the URL query string:
+Import the hook into your React component:
+
+```javascript
+import { useUrlQueryState } from 'use-url-query-state';
+```
+
+Instantiate a new state variable:
+```javascript
+const [state, setState] = useUrlQueryState(paramName, initialState);
+```
+
+Here is an example of the hook in a component:
 
 ```javascript
 import { useUrlQueryState } from 'use-url-query-state';
