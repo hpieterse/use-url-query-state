@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "esbuild app.tsx --bundle --servedir=www/ --outdir=www/js"
+    "start": "esbuild app.tsx --bundle --servedir=www/ --outdir=www/js",
+    "build": "esbuild app.tsx --bundle --minify --outdir=www/js"
   },
   "author": "",
   "license": "MIT",
