@@ -1,4 +1,6 @@
 # useUrlQueryState
+![build](https://github.com/hpieterse/use-url-query-state/actions/workflows/build.yml/badge.svg)
+
 `useUrlQueryState` is a React hook that makes it easy to manage the state in the URL query string.
 
 ## Why
