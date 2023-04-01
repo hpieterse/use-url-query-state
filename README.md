@@ -1,5 +1,6 @@
 # useUrlQueryState
-![build](https://github.com/hpieterse/use-url-query-state/actions/workflows/build.yml/badge.svg)
+![build](https://github.com/hpieterse/use-url-query-state/actions/workflows/build.yml/badge.svg) 
+<a href="https://www.npmjs.com/package/use-url-query-state"><img alt="npm" src="https://img.shields.io/npm/v/use-url-query-state.svg"></a>
 
 `useUrlQueryState` is a React hook that makes it easy to manage the state in the URL query string.
 
