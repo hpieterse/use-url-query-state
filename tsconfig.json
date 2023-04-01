@@ -13,7 +13,8 @@
   ],
   "exclude": [
     "node_modules",
-    "**/__tests__/*"
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
   ],
   "watchOptions": {
     // Use native file system events for files and directories
@@ -28,10 +29,8 @@
     // files to track  work from these directories
     "excludeDirectories": [
       "**/node_modules",
-      "_build"
+      "dist",
+      "example",
     ],
-    "excludeFiles": [
-      "build/fileWhichChangesOften.ts"
-    ]
   }
 }
