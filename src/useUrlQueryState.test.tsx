@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import useUrlQueryState from "./useUrlQueryState";

@@ -34,10 +34,8 @@ describe("asyncReducerQue", () => {
       }
     );
 
-    let resolvedValue: number[] | null = null;
-    setResolver((result) => {
-      resolvedValue = result;
-    });
+    const resolver = jest.fn();
+    setResolver(resolver);
 
     //act
     const initialValue = [0];
@@ -49,6 +47,7 @@ describe("asyncReducerQue", () => {
     await new Promise<void>((r) => r());
 
     //assert
-    expect(resolvedValue).toEqual([0, 10, 20, 50]);
+    expect(resolver).toHaveBeenCalledTimes(1);
+    expect(resolver).toHaveBeenCalledWith([0, 10, 20, 50]);
   });
 });
