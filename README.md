@@ -1,12 +1,12 @@
 # useUrlQueryState
-<img alt="build" src="https://github.com/hpieterse/use-url-query-state/actions/workflows/build.yml/badge.svg">
+![build](https://github.com/hpieterse/use-url-query-state/actions/workflows/build.yml/badge.svg) 
 <a href="https://www.npmjs.com/package/use-url-query-state"><img alt="npm" src="https://img.shields.io/npm/v/use-url-query-state.svg"></a>
 
 `useUrlQueryState` is a React hook that makes it easy to manage the state in the URL query string.
 
-Take a look at this <a href="https://www.handsaw.co.za/use-url-query-state/">Demo</a> to see it in action.
+Take a look at this [Demo](https://www.handsaw.co.za/use-url-query-state/)to see it in action.
 
-`useUrlQueryState` is dependent on <a href="https://reactrouter.com/">React Router</a>
+`useUrlQueryState` is dependent on [React Router](https://reactrouter.com/).
 
 ## Why
 In some cases, it's beneficial to use the route to store your application state. It allows the user to refresh or bookmark a page and keep its state. For example, if a user wants to share or bookmark a specific search result.
