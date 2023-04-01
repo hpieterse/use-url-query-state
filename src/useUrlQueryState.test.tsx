@@ -117,5 +117,29 @@ describe("useUrlQueryState", () => {
       // assert
       expect(screen.getByRole("heading").textContent).toEqual("some value");
     });
+
+    it("should remove items when the value is equal to the default", async () => {
+      // arrange
+      render(
+        <MemoryRouter
+          initialEntries={[{ pathname: "/", search: "?prop=%22some+value%22" }]}
+        >
+          <TestComponentWithLocation
+            initialValue="initial value"
+            newValue="initial value"
+          ></TestComponentWithLocation>
+        </MemoryRouter>
+      );
+
+      expect(screen.getByRole("heading").textContent).toEqual(
+        "?prop=%22some+value%22"
+      );
+
+      // act
+      await userEvent.click(screen.getByRole("button"));
+
+      // assert
+      expect(screen.getByRole("heading").textContent).toEqual("");
+    });
   });
 });
