@@ -12,7 +12,9 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
   },
-]);
+], {
+  basename: window.location.pathname.replace(/(\/[^/]+)$/, ""),
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
