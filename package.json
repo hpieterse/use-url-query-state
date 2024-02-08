@@ -1,6 +1,6 @@
 {
   "name": "use-url-query-state",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple light weight React hook to use the url query parameters to store state",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
