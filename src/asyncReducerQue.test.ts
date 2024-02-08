@@ -6,7 +6,7 @@ describe("asyncReducerQue", () => {
     const [que, setResolver] = asyncReducerQue(
       (values: number[], value: number) => {
         return [...values, value];
-      }
+      },
     );
 
     let resolvedValue: number[] | null = null;
@@ -31,7 +31,7 @@ describe("asyncReducerQue", () => {
     const [que, setResolver] = asyncReducerQue(
       (values: number[], value: number) => {
         return [...values, value];
-      }
+      },
     );
 
     const resolver = jest.fn();

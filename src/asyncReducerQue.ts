@@ -6,7 +6,7 @@ export type OnResolve<TResult> = (result: TResult) => void;
 export type SetResolver<TResult> = (onResolve: OnResolve<TResult>) => void;
 
 const asyncReducerQue = <TValue, TResult>(
-  reduce: (result: TResult, value: TValue) => TResult
+  reduce: (result: TResult, value: TValue) => TResult,
 ): [asyncReducerQue<TValue, TResult>, SetResolver<TResult>] => {
   const changeQue: Array<TValue> = [];
   let resolver: OnResolve<TResult> | null = null;

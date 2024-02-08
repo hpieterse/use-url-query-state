@@ -5,7 +5,7 @@ describe("searchParser", () => {
     // arrange
 
     // act
-    const result = searchParser("?value=100", "value", 0);
+    const result = searchParser(new URLSearchParams("?value=100"), "value", 0);
 
     // assert
     expect(result).toBe(100);
@@ -15,7 +15,11 @@ describe("searchParser", () => {
     // arrange
 
     // act
-    const result = searchParser("?somethingElse=20", "value", 0);
+    const result = searchParser(
+      new URLSearchParams("?somethingElse=20"),
+      "value",
+      0,
+    );
 
     // assert
     expect(result).toBe(0);
@@ -26,9 +30,9 @@ describe("searchParser", () => {
 
     // act
     const result = searchParser(
-      '?value={"one": 1, "two": "second"}',
+      new URLSearchParams('?value={"one": 1, "two": "second"}'),
       "value",
-      0
+      0,
     );
 
     // assert
@@ -39,7 +43,11 @@ describe("searchParser", () => {
     // arrange
 
     // act
-    const result = searchParser('?value={"invalid json"}', "value", 0);
+    const result = searchParser(
+      new URLSearchParams('?value={"invalid json"}'),
+      "value",
+      0,
+    );
 
     // assert
     expect(result).toStrictEqual(0);

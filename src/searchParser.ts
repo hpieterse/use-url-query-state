@@ -1,11 +1,9 @@
 const searchParser = <T>(
-  searchString: string,
+  searchParams: URLSearchParams,
   paramName: string,
-  defaultValue: T
+  defaultValue: T,
 ): T => {
-  const params = new URLSearchParams(searchString);
-
-  const stringValue = params.get(paramName);
+  const stringValue = searchParams.get(paramName);
 
   if (stringValue == null) {
     return defaultValue;

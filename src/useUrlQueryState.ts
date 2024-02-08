@@ -1,7 +1,7 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useRef, useCallback, useEffect } from "react";
-import searchParser from "./searchParser";
+import { useSearchParams } from "react-router-dom";
+import { useCallback, useEffect, useMemo } from "react";
 import asyncReducerQue from "./asyncReducerQue";
+import searchParser from "./searchParser";
 
 const [reducerQue, setResolver] = asyncReducerQue<
   { paramName: string; value: string; defaultValue: string },
@@ -18,50 +18,38 @@ const [reducerQue, setResolver] = asyncReducerQue<
 
 const useUrlQueryState = <T>(
   paramName: string,
-  defaultValue: T
+  defaultValue: T,
 ): [T, (newValue: T) => void] => {
-  const currentValue = useRef<T>();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  // initialize value from the current route (happens during initial render)
-  if (currentValue.current == null) {
-    currentValue.current = searchParser(
-      location.search,
-      paramName,
-      defaultValue
-    );
-  }
+  const currentValue = useMemo(() => {
+    return searchParser(searchParams, paramName, defaultValue);
+  }, [searchParams, paramName, defaultValue]);
 
   useEffect(() => {
     setResolver((result) => {
-      navigate({
-        pathname: location.pathname,
-        search: result.toString(),
-      });
+      setSearchParams(result);
     });
-  }, [location.pathname, navigate]);
+  }, [setSearchParams]);
 
   const setFunction = useCallback(
     (newValue: T) => {
-      if (newValue !== currentValue.current) {
-        currentValue.current = newValue;
-      }
-
-      const newSearchParam = new URLSearchParams(location.search);
       const jsonString = JSON.stringify(newValue);
       const defaultValueJsonString = JSON.stringify(defaultValue);
 
       reducerQue.que(
-        { paramName, value: jsonString, defaultValue: defaultValueJsonString },
-        newSearchParam
+        {
+          paramName: paramName,
+          value: jsonString,
+          defaultValue: defaultValueJsonString,
+        },
+        searchParams,
       );
     },
-    [paramName, location.search, defaultValue]
+    [defaultValue, paramName, searchParams],
   );
 
-  return [currentValue.current, setFunction];
+  return [currentValue, setFunction];
 };
 
 export default useUrlQueryState;

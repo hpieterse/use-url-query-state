@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, useLocation } from "react-router-dom";
+import { MemoryRouter, useLocation, useNavigate } from "react-router-dom";
 import useUrlQueryState from "./useUrlQueryState";
 import userEvent from "@testing-library/user-event";
 
@@ -36,19 +36,28 @@ const TestComponentWithLocation = ({
   initialValue?: string;
   newValue?: string;
 }) => {
-  const [, setValue] = useUrlQueryState("prop", initialValue);
+  const [value, setValue] = useUrlQueryState("prop", initialValue);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setValue(newValue);
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <>
-      <h1>{location.search}</h1>
-      <button id="testButton" onClick={handleClick}>
+      <h1 data-testid="searchParam">{location.search}</h1>
+      <h1 data-testid="value">{value}</h1>
+      <button data-testid="navigateButton" onClick={handleClick}>
         Click
+      </button>
+      <button data-testid="backButton" onClick={handleBack}>
+        BACK
       </button>
     </>
   );
@@ -62,7 +71,7 @@ describe("useUrlQueryState", () => {
     render(
       <MemoryRouter initialEntries={[{ pathname: "/", search: "?" }]}>
         <TestComponent initialValue="initial value"></TestComponent>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     // assert
@@ -74,7 +83,7 @@ describe("useUrlQueryState", () => {
     render(
       <MemoryRouter initialEntries={[{ pathname: "/", search: "?" }]}>
         <TestComponent newValue="another value"></TestComponent>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     // act
@@ -90,15 +99,15 @@ describe("useUrlQueryState", () => {
       render(
         <MemoryRouter initialEntries={[{ pathname: "/", search: "?" }]}>
           <TestComponentWithLocation newValue="another value"></TestComponentWithLocation>
-        </MemoryRouter>
+        </MemoryRouter>,
       );
 
       // act
-      await userEvent.click(screen.getByRole("button"));
+      await userEvent.click(screen.getByTestId("navigateButton"));
 
       // assert
-      expect(screen.getByRole("heading").textContent).toEqual(
-        "?prop=%22another+value%22"
+      expect(screen.getByTestId("searchParam").textContent).toEqual(
+        "?prop=%22another+value%22",
       );
     });
 
@@ -109,13 +118,36 @@ describe("useUrlQueryState", () => {
           initialEntries={[{ pathname: "/", search: "?prop=%22some+value%22" }]}
         >
           <TestComponent></TestComponent>
-        </MemoryRouter>
+        </MemoryRouter>,
       );
 
       // act
 
       // assert
       expect(screen.getByRole("heading").textContent).toEqual("some value");
+    });
+
+    it("should change state when the route changes", async () => {
+      // arrange
+      render(
+        <MemoryRouter
+          initialEntries={[
+            { pathname: "/", search: "?prop=%22start+value%22" },
+          ]}
+        >
+          <TestComponentWithLocation
+            initialValue="start"
+            newValue="updated"
+          ></TestComponentWithLocation>
+        </MemoryRouter>,
+      );
+
+      // act
+      await userEvent.click(screen.getByTestId("navigateButton"));
+      await userEvent.click(screen.getByTestId("backButton"));
+
+      // assert
+      expect(screen.getByTestId("value").textContent).toEqual("start value");
     });
 
     it("should remove items when the value is equal to the default", async () => {
@@ -128,18 +160,18 @@ describe("useUrlQueryState", () => {
             initialValue="initial value"
             newValue="initial value"
           ></TestComponentWithLocation>
-        </MemoryRouter>
+        </MemoryRouter>,
       );
 
-      expect(screen.getByRole("heading").textContent).toEqual(
-        "?prop=%22some+value%22"
+      expect(screen.getByTestId("searchParam").textContent).toEqual(
+        "?prop=%22some+value%22",
       );
 
       // act
-      await userEvent.click(screen.getByRole("button"));
+      await userEvent.click(screen.getByTestId("navigateButton"));
 
       // assert
-      expect(screen.getByRole("heading").textContent).toEqual("");
+      expect(screen.getByTestId("searchParam").textContent).toEqual("");
     });
   });
 });
