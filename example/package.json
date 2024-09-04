@@ -15,9 +15,9 @@
     "use-url-query-state": "file:../"
   },
   "devDependencies": {
-    "@types/react": "18.2.55",
-    "@types/react-dom": "18.2.19",
-    "@vitejs/plugin-react": "4.2.1",
-    "vite": "5.0.12"
+    "@types/react": "18.3.5",
+    "@types/react-dom": "18.3.0",
+    "@vitejs/plugin-react": "4.3.1",
+    "vite": "5.4.3"
   }
 }
