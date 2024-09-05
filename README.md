@@ -4,7 +4,7 @@
 
 `useUrlQueryState` is a React hook that makes it easy to manage the state in the URL query string.
 
-Take a look at this [Demo](https://www.handsaw.co.za/use-url-query-state/) to see it in action.
+Take a look at this [Demo](https://hpieterse.github.io/use-url-query-state/) to see it in action.
 
 `useUrlQueryState` is dependent on [React Router](https://reactrouter.com/).
 
