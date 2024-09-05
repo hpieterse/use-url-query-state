@@ -22,19 +22,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: 20.x
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install dependencies (lib)
+        run: npm ci
+
+      - name: Build library
+        run: npm run build
+
+      - name: Install dependencies (example)
         working-directory: ./example
         run: npm ci
 
       - name: Build
         working-directory: ./example
-        run: npm build
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
