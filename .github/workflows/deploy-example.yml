@@ -28,7 +28,10 @@ jobs:
           node-version: 18.x
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install dependencies (lib)
+        run: npm ci
+
+      - name: Install dependencies (example)
         working-directory: ./example
         run: npm ci
 
